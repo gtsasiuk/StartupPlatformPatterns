@@ -4,6 +4,7 @@ import com.startup.patterns.creational.builder.*;
 import com.startup.patterns.creational.factory.Infrastructure;
 import com.startup.patterns.creational.factory.InfrastructureFactory;
 import com.startup.patterns.creational.factory.InfrastructureType;
+import com.startup.patterns.creational.factory_method.*;
 import com.startup.patterns.creational.prototype.StartupTemplate;
 import com.startup.patterns.creational.singleton.EnvProfile;
 import com.startup.patterns.creational.singleton.PlatformConfig;
@@ -91,6 +92,19 @@ public class CreationalDemo {
         System.out.println("------------Factory end----------");
         System.out.println();
 
+        System.out.println("------------Factory method begin----------");
+        SubscriptionPlanCreator creator = new FounderSubscriptionCreator();
+        SubscriptionPlan subsPlan = creator.createSubscriptionPlan(SubscriptionPlanType.FREE);
+        System.out.println(creator + "has created: " + subsPlan.showDetails());
+        subsPlan = creator.createSubscriptionPlan(SubscriptionPlanType.PREMIUM);
+        System.out.println(creator + "has created: " + subsPlan.showDetails());
+        creator = new DeveloperSubscriptionCreator();
+        subsPlan = creator.createSubscriptionPlan(SubscriptionPlanType.FREE);
+        System.out.println(creator + "has created: " + subsPlan.showDetails());
+        subsPlan = creator.createSubscriptionPlan(SubscriptionPlanType.STANDARD);
+        System.out.println(creator + "has created: " + subsPlan.showDetails());
+        System.out.println("------------Factory method end----------");
+        System.out.println();
 
         System.out.println("------------Prototype begin------------");
         StartupTemplate saas = new StartupTemplate("SaaS Starter", "SaaS", BigDecimal.valueOf(50000));
