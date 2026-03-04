@@ -1,5 +1,9 @@
 package com.startup.patterns.creational;
 
+import com.startup.patterns.creational.abstract_factory.AIStartupFactory;
+import com.startup.patterns.creational.abstract_factory.StartupPlatform;
+import com.startup.patterns.creational.abstract_factory.StartupPlatformFactory;
+import com.startup.patterns.creational.abstract_factory.StartupType;
 import com.startup.patterns.creational.builder.*;
 import com.startup.patterns.creational.factory.Infrastructure;
 import com.startup.patterns.creational.factory.InfrastructureFactory;
@@ -16,6 +20,28 @@ import java.util.Set;
 
 public class CreationalDemo {
     public static void main(String[] args) {
+        System.out.println("----------Abstract Factory begin----------");
+        StartupPlatformFactory aiStartupFactory = StartupPlatform.FactoryMaker.makeFactory(StartupType.AI);
+        StartupPlatform aiStartupPlatform = new StartupPlatform(
+                aiStartupFactory.createDashboard(),
+                aiStartupFactory.createBillingService(),
+                aiStartupFactory.createAnalyticsService()
+        );
+        System.out.println(aiStartupPlatform.dashboard().description());
+        System.out.println(aiStartupPlatform.billingService().description());
+        System.out.println(aiStartupPlatform.analyticsService().description());
+        StartupPlatformFactory ecommerceStartupFactory = StartupPlatform.FactoryMaker.makeFactory(StartupType.ECOMMERCE);
+        StartupPlatform ecommerceStartupPlatform = new StartupPlatform(
+                ecommerceStartupFactory.createDashboard(),
+                ecommerceStartupFactory.createBillingService(),
+                ecommerceStartupFactory.createAnalyticsService()
+        );
+        System.out.println(ecommerceStartupPlatform.dashboard().description());
+        System.out.println(ecommerceStartupPlatform.billingService().description());
+        System.out.println(ecommerceStartupPlatform.analyticsService().description());
+        System.out.println("------------Abstract Factory end----------");
+        System.out.println();
+
         System.out.println("----------Builder begin----------");
         Startup aiProject = new Startup.StartupBuilder("AI Platform", "AI analytics SaaS platform")
                 .budget(new BigDecimal("50000"))
