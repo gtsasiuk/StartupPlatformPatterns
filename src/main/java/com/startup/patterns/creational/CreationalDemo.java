@@ -1,6 +1,7 @@
 package com.startup.patterns.creational;
 
 import com.startup.patterns.creational.builder.*;
+import com.startup.patterns.creational.prototype.StartupTemplate;
 import com.startup.patterns.creational.singleton.EnvProfile;
 import com.startup.patterns.creational.singleton.PlatformConfig;
 
@@ -67,8 +68,34 @@ public class CreationalDemo {
         System.out.println(mobileShop.toString());
         System.out.println("Startup 3");
         System.out.println(eduPlatform);
-
         System.out.println("------------Builder end----------");
+        System.out.println();
+
+        System.out.println("------------Prototype begin------------");
+        StartupTemplate saas = new StartupTemplate("SaaS Starter", "SaaS", BigDecimal.valueOf(50000));
+        StartupTemplate saasClone = (StartupTemplate) saas.doClone();
+
+        if (saas == saasClone) {
+            System.out.println("SaaS Starter is not the same");
+        }
+        if (saas.equals(saasClone)) {
+            System.out.println("SaaS Starter is the same");
+        }
+
+        StartupTemplate mobile = new StartupTemplate("MobileApp Pro", "Mobile Market Place", BigDecimal.valueOf(75000));
+        StartupTemplate mobileClone = (StartupTemplate) mobile.doClone();
+
+        if (mobile == mobileClone) {
+            System.out.println("MobileApp Pro is not the same");
+        }
+        if (mobile.equals(mobileClone)) {
+            System.out.println("MobileApp Pro is the same\n");
+        }
+
+        System.out.println(saasClone);
+        System.out.println(mobileClone);
+        System.out.println("------------Prototype end----------");
+        System.out.println();
 
         System.out.println("----------Singleton begin----------");
         PlatformConfig config = PlatformConfig.getInstance(EnvProfile.DEV, "globalKey1", "USD", 100, "1.0.0");
