@@ -1,6 +1,9 @@
 package com.startup.patterns.creational;
 
 import com.startup.patterns.creational.builder.*;
+import com.startup.patterns.creational.factory.Infrastructure;
+import com.startup.patterns.creational.factory.InfrastructureFactory;
+import com.startup.patterns.creational.factory.InfrastructureType;
 import com.startup.patterns.creational.prototype.StartupTemplate;
 import com.startup.patterns.creational.singleton.EnvProfile;
 import com.startup.patterns.creational.singleton.PlatformConfig;
@@ -70,6 +73,24 @@ public class CreationalDemo {
         System.out.println(eduPlatform);
         System.out.println("------------Builder end----------");
         System.out.println();
+
+        System.out.println("------------Factory begin----------");
+        System.out.println("Infrastructure Factory begin its work.");
+        Infrastructure webService = InfrastructureFactory.createInfrastructure(InfrastructureType.WEB_SERVICE);
+        Infrastructure mobileApp = InfrastructureFactory.createInfrastructure(InfrastructureType.MOBILE_APP);
+        Infrastructure restServer = InfrastructureFactory.createInfrastructure(InfrastructureType.RESTAPI_SERVER);
+        Infrastructure postgresDb = InfrastructureFactory.createInfrastructure(InfrastructureType.DB);
+        Infrastructure cloudStorage = InfrastructureFactory.createInfrastructure(InfrastructureType.CLOUD_STORAGE);
+        Infrastructure aiModule = InfrastructureFactory.createInfrastructure(InfrastructureType.AI_MODULE);
+        System.out.println(webService.showInfrastructureDetails());
+        System.out.println(mobileApp.showInfrastructureDetails());
+        System.out.println(restServer.showInfrastructureDetails());
+        System.out.println(postgresDb.showInfrastructureDetails());
+        System.out.println(cloudStorage.showInfrastructureDetails());
+        System.out.println(aiModule.showInfrastructureDetails());
+        System.out.println("------------Factory end----------");
+        System.out.println();
+
 
         System.out.println("------------Prototype begin------------");
         StartupTemplate saas = new StartupTemplate("SaaS Starter", "SaaS", BigDecimal.valueOf(50000));
