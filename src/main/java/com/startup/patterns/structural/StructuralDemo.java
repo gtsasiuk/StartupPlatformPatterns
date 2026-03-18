@@ -7,6 +7,7 @@ import com.startup.patterns.structural.bridge.ApiExecution;
 import com.startup.patterns.structural.bridge.ChatFeature;
 import com.startup.patterns.structural.bridge.CloudExecution;
 import com.startup.patterns.structural.bridge.PaymentFeature;
+import com.startup.patterns.structural.composite.ProjectCreator;
 import com.startup.patterns.structural.decorator.PremiumUserDecorator;
 import com.startup.patterns.structural.decorator.SimpleUserProfile;
 import com.startup.patterns.structural.decorator.VerifiedUserDecorator;
@@ -36,6 +37,9 @@ public class StructuralDemo {
         System.out.println();
 
         System.out.println("----------Composite begin----------");
+        var startupProjectCreator = new ProjectCreator();
+        startupProjectCreator.buildStartupProject().execute();
+        System.out.println();
         System.out.println("----------Composite end----------");
         System.out.println();
 
