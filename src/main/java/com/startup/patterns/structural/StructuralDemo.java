@@ -11,6 +11,8 @@ import com.startup.patterns.structural.composite.ProjectCreator;
 import com.startup.patterns.structural.decorator.PremiumUserDecorator;
 import com.startup.patterns.structural.decorator.SimpleUserProfile;
 import com.startup.patterns.structural.decorator.VerifiedUserDecorator;
+import com.startup.patterns.structural.proxy.RealStartupAccess;
+import com.startup.patterns.structural.proxy.StartupAccessProxy;
 
 public class StructuralDemo {
     public static void main(String[] args) {
@@ -65,6 +67,10 @@ public class StructuralDemo {
         System.out.println();
 
         System.out.println("----------Proxy begin----------");
+        var freeUser = new StartupAccessProxy(new RealStartupAccess(), false);
+        freeUser.launch("FreeUser");
+        var premiumUser = new StartupAccessProxy(new RealStartupAccess(), true);
+        premiumUser.launch("PremiumUser");
         System.out.println("----------Proxy end----------");
     }
 }
