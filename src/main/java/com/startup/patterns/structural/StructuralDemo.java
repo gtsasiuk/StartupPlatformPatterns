@@ -11,6 +11,7 @@ import com.startup.patterns.structural.composite.ProjectCreator;
 import com.startup.patterns.structural.decorator.PremiumUserDecorator;
 import com.startup.patterns.structural.decorator.SimpleUserProfile;
 import com.startup.patterns.structural.decorator.VerifiedUserDecorator;
+import com.startup.patterns.structural.facade.StartupFacade;
 import com.startup.patterns.structural.proxy.RealStartupAccess;
 import com.startup.patterns.structural.proxy.StartupAccessProxy;
 
@@ -59,6 +60,9 @@ public class StructuralDemo {
         System.out.println();
 
         System.out.println("----------Facade begin----------");
+        var facade = new StartupFacade();
+        facade.launchStartup();
+        facade.shutdownStartup();
         System.out.println("----------Facade end----------");
         System.out.println();
 
