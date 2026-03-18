@@ -12,8 +12,13 @@ import com.startup.patterns.structural.decorator.PremiumUserDecorator;
 import com.startup.patterns.structural.decorator.SimpleUserProfile;
 import com.startup.patterns.structural.decorator.VerifiedUserDecorator;
 import com.startup.patterns.structural.facade.StartupFacade;
+import com.startup.patterns.structural.flyweight.Startup;
+import com.startup.patterns.structural.flyweight.TechFactory;
+import com.startup.patterns.structural.flyweight.TechType;
 import com.startup.patterns.structural.proxy.RealStartupAccess;
 import com.startup.patterns.structural.proxy.StartupAccessProxy;
+
+import java.util.List;
 
 public class StructuralDemo {
     public static void main(String[] args) {
@@ -67,6 +72,20 @@ public class StructuralDemo {
         System.out.println();
 
         System.out.println("----------Flyweight begin----------");
+        var techFactory = new TechFactory();
+
+        var startupA = new Startup("Startup A", List.of(
+                techFactory.getTech(TechType.JAVA),
+                techFactory.getTech(TechType.PYTHON)
+        ));
+
+        var startupB = new Startup("Startup B", List.of(
+                techFactory.getTech(TechType.JAVA),
+                techFactory.getTech(TechType.NODEJS)
+        ));
+
+        startupA.showTech();
+        startupB.showTech();
         System.out.println("----------Flyweight end----------");
         System.out.println();
 
