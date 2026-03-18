@@ -3,6 +3,10 @@ package com.startup.patterns.structural;
 import com.startup.patterns.structural.adapter.EmailAdapter;
 import com.startup.patterns.structural.adapter.NotificationManager;
 import com.startup.patterns.structural.adapter.TelegramAdapter;
+import com.startup.patterns.structural.bridge.ApiExecution;
+import com.startup.patterns.structural.bridge.ChatFeature;
+import com.startup.patterns.structural.bridge.CloudExecution;
+import com.startup.patterns.structural.bridge.PaymentFeature;
 import com.startup.patterns.structural.decorator.PremiumUserDecorator;
 import com.startup.patterns.structural.decorator.SimpleUserProfile;
 import com.startup.patterns.structural.decorator.VerifiedUserDecorator;
@@ -18,6 +22,16 @@ public class StructuralDemo {
         System.out.println();
 
         System.out.println("----------Bridge begin----------");
+        System.out.println("Startup app received command to activate chat.");
+        var chat = new ChatFeature(new CloudExecution());
+        chat.enable();
+        chat.execute();
+        chat.disable();
+        System.out.println("Startup app received an user order");
+        var payment = new PaymentFeature(new ApiExecution());
+        payment.enable();
+        payment.execute();
+        payment.disable();
         System.out.println("----------Bridge end----------");
         System.out.println();
 
