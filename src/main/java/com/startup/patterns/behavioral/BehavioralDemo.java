@@ -2,6 +2,10 @@ package com.startup.patterns.behavioral;
 
 import com.startup.patterns.behavioral.iterator.*;
 import com.startup.patterns.behavioral.observer.*;
+import com.startup.patterns.behavioral.strategy.BootstrappingStrategy;
+import com.startup.patterns.behavioral.strategy.CrowdfundingStrategy;
+import com.startup.patterns.behavioral.strategy.Startup;
+import com.startup.patterns.behavioral.strategy.VentureCapitalStrategy;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +29,7 @@ public class BehavioralDemo {
                 "New Health startup joined platform",
                         LocalDateTime.now().minusDays(1)));
         System.out.println("------------Observer end----------");
+
         System.out.println();
         System.out.println("------------Iterator begin----------");
         PitchRequestCollection collection = new PitchRequestCollection();
@@ -42,6 +47,22 @@ public class BehavioralDemo {
             System.out.println(iterator.next().toString());
         }
         System.out.println("------------Iterator end----------");
+        System.out.println();
+
+        System.out.println("------------Strategy begin----------");
+        Startup startup = new Startup("FinTechX");
+
+        startup.setStrategy(new BootstrappingStrategy());
+        startup.applyFunding();
+
+        startup.setStrategy(new CrowdfundingStrategy());
+        startup.applyFunding();
+
+        startup.setStrategy(new VentureCapitalStrategy());
+        startup.applyFunding();
+
+        System.out.println("Total budget: " + startup.getBudget());
+        System.out.println("------------Strategy end----------");
         System.out.println();
     }
 }
