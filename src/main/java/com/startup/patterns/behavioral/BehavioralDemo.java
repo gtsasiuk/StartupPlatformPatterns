@@ -8,6 +8,10 @@ import com.startup.patterns.behavioral.strategy.BootstrappingStrategy;
 import com.startup.patterns.behavioral.strategy.CrowdfundingStrategy;
 import com.startup.patterns.behavioral.strategy.Startup;
 import com.startup.patterns.behavioral.strategy.VentureCapitalStrategy;
+import com.startup.patterns.behavioral.visitor.Database;
+import com.startup.patterns.behavioral.visitor.MessageQueue;
+import com.startup.patterns.behavioral.visitor.ResourceMonitorVisitor;
+import com.startup.patterns.behavioral.visitor.ServerNode;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -101,6 +105,25 @@ public class BehavioralDemo {
 
         user.performAction();
         System.out.println("------------State end----------");
+        System.out.println();
+
+        System.out.println("------------Visitor begin----------");
+        ServerNode s1 = new ServerNode("Server-1", 120, 65.5);
+        ServerNode s2 = new ServerNode("Server-2", 80, 30.2);
+
+        Database db = new Database("StartupDB", 1500, 120.7);
+
+        MessageQueue mq = new MessageQueue("EmailQueue", 250);
+
+        ResourceMonitorVisitor monitor = new ResourceMonitorVisitor();
+
+        s1.accept(monitor);
+        s2.accept(monitor);
+        db.accept(monitor);
+        mq.accept(monitor);
+
+        monitor.printSummary();
+        System.out.println("------------Visitor end----------");
         System.out.println();
     }
 }
