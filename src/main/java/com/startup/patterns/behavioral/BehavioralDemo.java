@@ -2,6 +2,8 @@ package com.startup.patterns.behavioral;
 
 import com.startup.patterns.behavioral.command.*;
 import com.startup.patterns.behavioral.iterator.*;
+import com.startup.patterns.behavioral.memento.ConfigHistory;
+import com.startup.patterns.behavioral.memento.LaunchConfig;
 import com.startup.patterns.behavioral.observer.*;
 import com.startup.patterns.behavioral.state.User;
 import com.startup.patterns.behavioral.strategy.BootstrappingStrategy;
@@ -105,6 +107,29 @@ public class BehavioralDemo {
 
         user.performAction();
         System.out.println("------------State end----------");
+        System.out.println();
+
+        System.out.println("------------Memento begin----------");
+        LaunchConfig config = new LaunchConfig("AI Startup");
+        ConfigHistory history = new ConfigHistory();
+
+        config.setCategory("AI");
+        config.setBudget(50000);
+        config.setVisibility("PRIVATE");
+
+        history.save(config.save());
+
+        config.setBudget(100000);
+        config.setVisibility("PUBLIC");
+
+        System.out.println("Current:");
+        config.printState();
+
+        config.restore(history.undo());
+
+        System.out.println("After undo:");
+        config.printState();
+        System.out.println("------------Memento end----------");
         System.out.println();
 
         System.out.println("------------Visitor begin----------");
