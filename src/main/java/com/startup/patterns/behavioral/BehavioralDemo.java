@@ -2,6 +2,7 @@ package com.startup.patterns.behavioral;
 
 import com.startup.patterns.behavioral.iterator.*;
 import com.startup.patterns.behavioral.observer.*;
+import com.startup.patterns.behavioral.state.User;
 import com.startup.patterns.behavioral.strategy.BootstrappingStrategy;
 import com.startup.patterns.behavioral.strategy.CrowdfundingStrategy;
 import com.startup.patterns.behavioral.strategy.Startup;
@@ -63,6 +64,22 @@ public class BehavioralDemo {
 
         System.out.println("Total budget: " + startup.getBudget());
         System.out.println("------------Strategy end----------");
+        System.out.println();
+
+        System.out.println("------------State begin----------");
+        User user = new User("Eugene");
+
+        user.performAction();
+        user.nextStep();
+
+        user.performAction();
+        user.nextStep();
+
+        user.performAction();
+        user.nextStep();
+
+        user.performAction();
+        System.out.println("------------State end----------");
         System.out.println();
     }
 }
