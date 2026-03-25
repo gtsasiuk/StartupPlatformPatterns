@@ -1,10 +1,29 @@
 package com.startup.patterns.behavioral;
 
 import com.startup.patterns.behavioral.iterator.*;
+import com.startup.patterns.behavioral.observer.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class BehavioralDemo {
     public static void main(String[] args) {
         System.out.println("------------Observer begin----------");
+        EventManager manager = new EventManager();
+
+        Investor investor1 = new Investor("John", List.of("AI", "FinTech"));
+        Mentor mentor1 = new Mentor("Alice");
+
+        manager.subscribe(investor1);
+        manager.subscribe(mentor1);
+
+        manager.addEvent(new PlatformEvent(
+                EventType.NEW_PITCH,
+                "New AI startup is looking for funding",
+                LocalDateTime.of(2026, 1, 2, 20, 12, 10)));
+        manager.addEvent(new PlatformEvent(EventType.NEW_STARTUP,
+                "New Health startup joined platform",
+                        LocalDateTime.now().minusDays(1)));
         System.out.println("------------Observer end----------");
         System.out.println();
         System.out.println("------------Iterator begin----------");
