@@ -1,5 +1,6 @@
 package com.startup.patterns.behavioral;
 
+import com.startup.patterns.behavioral.command.*;
 import com.startup.patterns.behavioral.iterator.*;
 import com.startup.patterns.behavioral.observer.*;
 import com.startup.patterns.behavioral.state.User;
@@ -13,20 +14,40 @@ import java.util.List;
 
 public class BehavioralDemo {
     public static void main(String[] args) {
+        System.out.println("------------Command begin----------");
+        PlatformManager platformManager = new PlatformManager();
+        CommandInvoker invoker = new CommandInvoker();
+
+        Command launchCampaign = new LaunchCampaignCommand(platformManager, "Spring Sale");
+        Command sendEmail = new SendEmailCommand(platformManager, "Hello investors!", new String[]{"alice@x.com", "bob@y.com"});
+        Command archiveStartup = new ArchiveStartupCommand(platformManager, "OldStartup");
+
+        invoker.executeCommand(launchCampaign);
+        invoker.executeCommand(sendEmail);
+        invoker.executeCommand(archiveStartup);
+
+        System.out.println("\nUndo last command:");
+        invoker.undoLast();
+
+        System.out.println("\nUndo Spring Sale:");
+        invoker.undo(launchCampaign);
+        System.out.println("------------Command end----------");
+        System.out.println();
+
         System.out.println("------------Observer begin----------");
-        EventManager manager = new EventManager();
+        EventManager eventManager = new EventManager();
 
         Investor investor1 = new Investor("John", List.of("AI", "FinTech"));
         Mentor mentor1 = new Mentor("Alice");
 
-        manager.subscribe(investor1);
-        manager.subscribe(mentor1);
+        eventManager.subscribe(investor1);
+        eventManager.subscribe(mentor1);
 
-        manager.addEvent(new PlatformEvent(
+        eventManager.addEvent(new PlatformEvent(
                 EventType.NEW_PITCH,
                 "New AI startup is looking for funding",
                 LocalDateTime.of(2026, 1, 2, 20, 12, 10)));
-        manager.addEvent(new PlatformEvent(EventType.NEW_STARTUP,
+        eventManager.addEvent(new PlatformEvent(EventType.NEW_STARTUP,
                 "New Health startup joined platform",
                         LocalDateTime.now().minusDays(1)));
         System.out.println("------------Observer end----------");
