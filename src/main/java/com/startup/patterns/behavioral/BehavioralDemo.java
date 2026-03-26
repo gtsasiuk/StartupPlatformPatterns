@@ -10,6 +10,10 @@ import com.startup.patterns.behavioral.strategy.BootstrappingStrategy;
 import com.startup.patterns.behavioral.strategy.CrowdfundingStrategy;
 import com.startup.patterns.behavioral.strategy.Startup;
 import com.startup.patterns.behavioral.strategy.VentureCapitalStrategy;
+import com.startup.patterns.behavioral.template.BetaLaunch;
+import com.startup.patterns.behavioral.template.FastLaunch;
+import com.startup.patterns.behavioral.template.FullLaunch;
+import com.startup.patterns.behavioral.template.LaunchProcess;
 import com.startup.patterns.behavioral.visitor.Database;
 import com.startup.patterns.behavioral.visitor.MessageQueue;
 import com.startup.patterns.behavioral.visitor.ResourceMonitorVisitor;
@@ -131,6 +135,23 @@ public class BehavioralDemo {
         config.printState();
         System.out.println("------------Memento end----------");
         System.out.println();
+
+        System.out.println("----------Template method start----------");
+        LaunchProcess fast = new FastLaunch();
+        LaunchProcess full = new FullLaunch();
+        LaunchProcess beta = new BetaLaunch();
+
+        System.out.println("=== Fast Launch ===");
+        fast.launch();
+
+        System.out.println("\n=== Full Launch ===");
+        full.launch();
+
+        System.out.println("\n=== Beta Launch ===");
+        beta.launch();
+        System.out.println("----------Template method end----------");
+        System.out.println();
+
 
         System.out.println("------------Visitor begin----------");
         ServerNode s1 = new ServerNode("Server-1", 120, 65.5);
