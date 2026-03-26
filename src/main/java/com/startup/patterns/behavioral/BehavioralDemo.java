@@ -1,5 +1,6 @@
 package com.startup.patterns.behavioral;
 
+import com.startup.patterns.behavioral.chain.*;
 import com.startup.patterns.behavioral.command.*;
 import com.startup.patterns.behavioral.iterator.*;
 import com.startup.patterns.behavioral.memento.ConfigHistory;
@@ -24,6 +25,22 @@ import java.util.List;
 
 public class BehavioralDemo {
     public static void main(String[] args) {
+        System.out.println("------------Chain of responsibility begin----------");
+        Content content = new Content(
+                "Amazing AI startup platform",
+                true,
+                false
+        );
+
+        ModerationHandler chain = new TextModerationHandler();
+        chain.setNext(new MediaModerationHandler())
+                .setNext(new LinkModerationHandler())
+                .setNext(new ComplianceHandler());
+
+        chain.handle(content);
+        System.out.println("------------Chain of responsibility end----------");
+        System.out.println();
+
         System.out.println("------------Command begin----------");
         PlatformManager platformManager = new PlatformManager();
         CommandInvoker invoker = new CommandInvoker();
