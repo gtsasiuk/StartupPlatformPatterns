@@ -3,6 +3,8 @@ package com.startup.patterns.behavioral;
 import com.startup.patterns.behavioral.chain.*;
 import com.startup.patterns.behavioral.command.*;
 import com.startup.patterns.behavioral.iterator.*;
+import com.startup.patterns.behavioral.mediator.*;
+import com.startup.patterns.behavioral.mediator.services.*;
 import com.startup.patterns.behavioral.memento.ConfigHistory;
 import com.startup.patterns.behavioral.memento.LaunchConfig;
 import com.startup.patterns.behavioral.observer.*;
@@ -128,6 +130,25 @@ public class BehavioralDemo {
 
         user.performAction();
         System.out.println("------------State end----------");
+        System.out.println();
+
+        System.out.println("------------Mediator begin----------");
+        PlatformHub mediator = new PlatformHub();
+
+        AnalyticsService analytics = new AnalyticsService(mediator);
+        NotificationService notification = new NotificationService(mediator);
+        BillingService billing = new BillingService(mediator);
+        StorageService storage = new StorageService(mediator);
+
+        mediator.setAnalyticsService(analytics);
+        mediator.setNotificationService(notification);
+        mediator.setBillingService(billing);
+        mediator.setStorageService(storage);
+
+        storage.saveData();
+        System.out.println();
+        billing.processPayment();
+        System.out.println("------------Mediator end----------");
         System.out.println();
 
         System.out.println("------------Memento begin----------");
